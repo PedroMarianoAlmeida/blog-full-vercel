@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 
 export const navLinks = [
   {
@@ -18,6 +20,7 @@ export const navLinks = [
 
 const Navbar = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -25,6 +28,20 @@ const Navbar = () => {
       <h1 className="text-3xl text-white">Full Vercel Blog</h1>
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
+        {session?.user?.name ? (
+          <>
+            <li className="font-poppins font-normal cursor-pointer text-[16px] mr-10">
+              <Link href="/new-post">New Post</Link>
+            </li>
+            <li className="font-poppins font-normal cursor-pointer text-[16px] mr-10">
+              <button onClick={() => signOut()}>Logout</button>
+            </li>
+          </>
+        ) : (
+          <li>
+            <button onClick={() => signIn()}>Login</button>
+          </li>
+        )}
         {navLinks.map((nav, index) => (
           <li
             key={nav.route}
@@ -50,6 +67,21 @@ const Navbar = () => {
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
+            {session?.user?.name ? (
+              <>
+                <li className="font-poppins font-medium cursor-pointer text-[16px] mb-4">
+                  <Link href="/new-post">New Post</Link>
+                </li>
+                <li className="font-poppins font-medium cursor-pointer text-[16px] mb-4">
+                  <button onClick={() => signOut()}>Logout</button>
+                </li>
+              </>
+            ) : (
+              <li className="font-poppins font-medium cursor-pointer text-[16px] mb-4">
+                <button onClick={() => signIn()}>Login</button>
+              </li>
+            )}
+
             {navLinks.map((nav, index) => (
               <li
                 key={nav.route}
