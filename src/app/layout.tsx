@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/components/SessionProvider";
 
-import NavMenu from "../components/NavMenu";
+import TopMenu from "@/components/TopMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +25,8 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
-          <main className="mx-auto max-w-5xl text-2xl flex gap-2">
-            <NavMenu />
+          <main className="mx-auto max-w-5xl text-2xl">
+            <TopMenu />
             {children}
           </main>
         </SessionProvider>
