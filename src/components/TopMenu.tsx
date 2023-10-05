@@ -38,7 +38,7 @@ const Navbar = () => {
             </li>
           </>
         ) : (
-          <li>
+          <li className="font-poppins font-normal cursor-pointer text-[16px] mr-10">
             <button onClick={() => signIn()}>Login</button>
           </li>
         )}
