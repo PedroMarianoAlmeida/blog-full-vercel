@@ -1,9 +1,8 @@
 import { getLastFivePosts } from "@/services/blogService";
-import { getServerSession } from "next-auth";
 
+export const dynamic = "force-dynamic";
 export default async function Home() {
   const recentPosts = await getLastFivePosts();
-  console.log({ recentPosts });
 
   if (recentPosts.success) {
     return (
