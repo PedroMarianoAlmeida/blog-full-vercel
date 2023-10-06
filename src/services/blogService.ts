@@ -21,7 +21,19 @@ export const createPost = async (post: Post, session: Session) => {
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;
-    
+
+    return { success: false, message };
+  }
+};
+
+export const getLastFivePosts = async () => {
+  try {
+    const { rows } = await sql`SELECT * FROM posts ORDER BY postID DESC LIMIT 5;`;
+    return { success: true, posts: rows };
+  } catch (error) {
+    let message = "Unknown Error";
+    if (error instanceof Error) message = error.message;
+
     return { success: false, message };
   }
 };
