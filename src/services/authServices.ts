@@ -1,4 +1,5 @@
-import { getServerSession } from "next-auth";
+"use server";
+import { Session, getServerSession } from "next-auth";
 import { sql } from "@vercel/postgres";
 
 export const canUserCreatePostChecker = async () => {
@@ -10,4 +11,14 @@ export const canUserCreatePostChecker = async () => {
 
   if (rows.length === 0) return false;
   return rows[0].cancreateposts;
+};
+
+export const getUserId = async (session: Session) => {
+  if (session?.user?.email === "") return null;
+
+  const { rows } =
+    await sql`SELECT * FROM postUsers WHERE email = ${session?.user?.email}`;
+
+  if (rows.length === 0) return null;
+  return rows[0].id;
 };

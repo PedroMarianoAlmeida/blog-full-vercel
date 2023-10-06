@@ -1,14 +1,21 @@
 "use client";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+
+import { createPost } from "@/services/blogService";
 
 const CreatePostForm = () => {
+  const { data: session } = useSession();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   //TODO: add image
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ title, content });
+    if (session?.user?.name === undefined) return;
+    const res = await createPost({ title, content }, session);
+    console.log({ res, title, content });
   };
 
   return (
