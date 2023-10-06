@@ -30,7 +30,13 @@ const Navbar = () => {
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {session?.user?.name ? (
           <>
-            <li className="font-poppins font-normal cursor-pointer text-[16px] mr-10">
+            <li
+              className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 ${
+                pathname === "/new-post"
+                  ? "text-white underline"
+                  : "text-dimWhite"
+              } `}
+            >
               <Link href="/new-post">New Post</Link>
             </li>
             <li className="font-poppins font-normal cursor-pointer text-[16px] mr-10">
@@ -69,7 +75,13 @@ const Navbar = () => {
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
             {session?.user?.name ? (
               <>
-                <li className="font-poppins font-medium cursor-pointer text-[16px] mb-4">
+                <li
+                  className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 mb-4${
+                    pathname === "/new-post"
+                      ? "text-white underline"
+                      : "text-dimWhite"
+                  } `}
+                >
                   <Link href="/new-post">New Post</Link>
                 </li>
                 <li className="font-poppins font-medium cursor-pointer text-[16px] mb-4">
