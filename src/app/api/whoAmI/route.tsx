@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-import { authoptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
-  const session = await getServerSession(authoptions);
+  const session = await getServerSession(authOptions);
 
   return NextResponse.json({ name: session?.user?.name ?? "Not Logged In" });
 }
