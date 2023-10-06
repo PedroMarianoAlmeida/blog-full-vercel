@@ -1,3 +1,4 @@
+import CreatePostForm from "@/components/CreatePostForm";
 import { canUserCreatePostChecker } from "@/services/authServices";
 import { redirect } from "next/navigation";
 
@@ -10,7 +11,7 @@ export default async function ProtectedRoute() {
 
   return (
     <div>
-      <h2>Create Post Form</h2>
+     <CreatePostForm />
     </div>
   );
 }
