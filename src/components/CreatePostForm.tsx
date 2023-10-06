@@ -10,12 +10,27 @@ const CreatePostForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   //TODO: add image
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (session?.user?.name === undefined) return;
-    const res = await createPost({ title, content }, session);
-    console.log({ res, title, content });
+    setLoading(true);
+    try {
+      const res = await createPost({ title, content }, session);
+      if (res.success) {
+        setTitle("");
+        setContent("");
+        setMessage("Post created successfully");
+      } else {
+        throw new Error("Error creating post");
+      }
+    } catch (error) {
+      setMessage("Post failed to create");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,7 +49,13 @@ const CreatePostForm = () => {
         onChange={(e) => setContent(e.target.value)}
         className="text-black"
       />
-      <button type="submit">Submit</button>
+      <button
+        type="submit"
+        disabled={loading || title === "" || content === ""}
+      >
+        Submit
+      </button>
+      <p>{message}</p>
     </form>
   );
 };
