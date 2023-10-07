@@ -8,7 +8,6 @@ const PostPage = async ({
 }) => {
   const res = await getPostById(postid);
 
-  console.log({ res });
   return (
     <>
       <h2>Post Page</h2>
