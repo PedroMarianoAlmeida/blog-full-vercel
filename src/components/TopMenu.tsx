@@ -32,12 +32,12 @@ const Navbar = () => {
           <>
             <li
               className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 ${
-                pathname === "/new-post"
+                pathname === "/post/new"
                   ? "text-white underline"
                   : "text-dimWhite"
               } `}
             >
-              <Link href="/new-post">New Post</Link>
+              <Link href="/post/new">New Post</Link>
             </li>
             <li className="font-poppins font-normal cursor-pointer text-[16px] mr-10">
               <button onClick={() => signOut()}>Logout</button>
@@ -77,12 +77,12 @@ const Navbar = () => {
               <>
                 <li
                   className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 mb-4${
-                    pathname === "/new-post"
+                    pathname === "/post/new"
                       ? "text-white underline"
                       : "text-dimWhite"
                   } `}
                 >
-                  <Link href="/new-post">New Post</Link>
+                  <Link href="/post/new">New Post</Link>
                 </li>
                 <li className="font-poppins font-medium cursor-pointer text-[16px] mb-4">
                   <button onClick={() => signOut()}>Logout</button>
